@@ -1,0 +1,41 @@
+<!Doctype html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        li {
+            list-style: none;
+            margin-bottom: 5px;
+        }
+
+        ul {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="title">ようこそ</h1>
+    <div>
+        <span id="category"></span>
+    </div>
+    <div>
+        <span id="difficulty"></span>
+    </div>
+    <p id="description">以下のボタンをクリック</p>
+    <button id="start" onclick="start()">開始</button>
+    <ul id="select">
+        <li><button class="btn" onclick="pusshChoices(event)"></button></li>
+        <li><button class="btn" onclick="pusshChoices(event)"> </button></li>
+        <li><button class="btn" onclick="pusshChoices(event)"></button></li>
+        <li><button class="btn" onclick="pusshChoices(event)"></button></li>
+    </ul>
+    <script src="main.js"></script>
+</body>
+
+</html>
