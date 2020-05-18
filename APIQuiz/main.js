@@ -4,14 +4,14 @@ const title = document.getElementById('title');
 const description = document.getElementById('description');
 const select = document.getElementById('select');
 const startButton = document.getElementById("start");
-let count = 1;
+const btns = document.getElementsByClassName('btn');
 const choices = [];
+const contentsPush = [];
+const questionItems = [];
 let contents = [];
-let contentsPush = [];
 let removedQuestion = [];
-let questionItems = [];
+let count = 1;
 let score = 0;
-const btn = document.getElementsByClassName('btn');
 
 function start() {
     startButton.style.display = "none";
@@ -21,29 +21,28 @@ function start() {
         .then(response => {
             if (response.ok) {
                 return response.json();
-            } else {
-                throw new Error('error');
-            }
+            } 
         })
+        .catch(error => console.error('Error:', error))
         .then(questions => {
             contents = questions.results;
             // console.log(contents);
             // pusshChoices(questions);
 
-            for (let i = 0; i < contents.length; i++) {
-                let tempAnswers = [];
-                tempAnswers.push({ isCorrect: true, text: contents[i].correct_answer });
-                tempAnswers.push({ isCorrect: false, text: contents[i].incorrect_answers[0] });
-                tempAnswers.push({ isCorrect: false, text: contents[i].incorrect_answers[1] });
-                tempAnswers.push({ isCorrect: false, text: contents[i].incorrect_answers[2] });
+            contents.forEach(function (content) {
+                const tempAnswers = [];
+                tempAnswers.push({ isCorrect: true, text: content.correct_answer });
+                tempAnswers.push({ isCorrect: false, text: content.incorrect_answers[0] });
+                tempAnswers.push({ isCorrect: false, text: content.incorrect_answers[1] });
+                tempAnswers.push({ isCorrect: false, text: content.incorrect_answers[2] });
                 questionItems.push(tempAnswers);
-            }
+            });
             console.log(questionItems);
             // console.log(questionItems); 
             removedQuestion = contents.slice(0, 1);
             // console.log(removedQuestion);
             showQuestion();
-          
+
         })
         .catch(err => {
             console.error(err);
@@ -73,12 +72,12 @@ function addButton(qItem) {
     }
 
     for (let i = 0; i < qItem.length; i++) {
-        btn[i].textContent = qItem[i].text;
+        btns[i].textContent = qItem[i].text;
         if (qItem[i].isCorrect) {
-            btn[i].setAttribute('value', '正解');
+            btns[i].setAttribute('value', '正解');
         }
         else {
-            btn[i].setAttribute('value', '残念');
+            btns[i].setAttribute('value', '残念');
         }
     }
 }
